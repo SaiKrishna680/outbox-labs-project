@@ -1,0 +1,69 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id              String     @id @default(uuid())
+  googleId        String?    @unique
+  email           String     @unique
+  name            String
+  avatar          String?
+  slackWebhookUrl String?
+  createdAt       DateTime   @default(now())
+  senders         Sender[]
+  emailJobs       EmailJob[]
+  campaigns       Campaign[]
+}
+
+model Sender {
+  id           String     @id @default(uuid())
+  userId       String
+  email        String
+  etherealUser String?
+  etherealPass String?
+  createdAt    DateTime   @default(now())
+  user         User       @relation(fields: [userId], references: [id])
+  emailJobs    EmailJob[]
+  campaigns    Campaign[]
+}
+
+model EmailJob {
+  id             String    @id @default(uuid())
+  userId         String
+  senderId       String
+  campaignId     String?
+  recipientEmail String
+  subject        String
+  body           String    @db.Text
+  scheduledAt    DateTime
+  sentAt         DateTime?
+  status         String    @default("scheduled")
+  idempotencyKey String    @unique
+  bullJobId      String?
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+  user           User      @relation(fields: [userId], references: [id])
+  sender         Sender    @relation(fields: [senderId], references: [id])
+  campaign       Campaign? @relation(fields: [campaignId], references: [id])
+}
+
+model Campaign {
+  id                 String     @id @default(uuid())
+  userId             String
+  senderId           String
+  subject            String
+  body               String     @db.Text
+  delayBetweenEmails Int
+  hourlyLimit        Int
+  startTime          DateTime
+  totalRecipients    Int
+  createdAt          DateTime   @default(now())
+  user               User       @relation(fields: [userId], references: [id])
+  sender             Sender     @relation(fields: [senderId], references: [id])
+  emailJobs          EmailJob[]
+}
