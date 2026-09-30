@@ -274,12 +274,12 @@ FRONTEND_URL=http://localhost:5173
 
 ## 🧪 How to Use
 
-1. **Login** — Open `http://localhost:5173` and click "Login with Google"
+1. **Login** — Open `https://outbox-labs-project.vercel.app/` and click "Login with Google"
 2. **Connect Slack** — Click "Connect Slack" in the sidebar to enable rate-limit notifications
 3. **Compose Single Email** — Click "Compose" → fill in recipient, subject, body → optionally pick a future time → click "Schedule Send"
 4. **Compose Bulk Campaign** — Click "Compose" → switch to "Bulk Campaign" tab → paste comma-separated emails → set delay → click "Schedule Send"
 5. **View Dashboard** — Click "Scheduled" tab to see pending emails, "Sent" tab to see delivered ones
-6. **Admin Queue Monitor** — Visit `http://localhost:3001/api/admin/queues` to see the BullMQ dashboard with active, delayed, and failed jobs
+6. **Admin Queue Monitor** — Visit `https://reachinbox-api-ce8d.onrender.com/api/admin/queues/` to see the BullMQ dashboard with active, delayed, and failed jobs
 7. **Test Rate Limiting** — Set `MAX_EMAILS_PER_HOUR_PER_SENDER=2` in `.env`, restart the backend, schedule 5+ emails — watch the first 2 get sent and the rest get delayed with a Slack alert
 
 ---
