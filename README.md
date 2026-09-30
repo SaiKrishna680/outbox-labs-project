@@ -288,7 +288,7 @@ FRONTEND_URL=http://localhost:5173
 
 > _A short demo video (under 5 minutes) showcasing the full flow is available here:_
 >
-> 📹 **[Watch Demo Video](#)** _(Replace this link with your actual video URL after recording)_
+> 📹 **[Watch Demo Video](#)** _(https://drive.google.com/drive/folders/17fNKwfBg-94rgzAThfiu29_5y7gwfOik?usp=drive_link)_
 >
 > The video covers:
 > - Google OAuth Login
