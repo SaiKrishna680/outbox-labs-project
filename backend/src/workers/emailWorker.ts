@@ -122,7 +122,7 @@ const processEmailJob = async (job: Job) => {
 };
 
 export const emailWorker = new Worker('email-queue', processEmailJob, {
-  connection: { host: config.redis.host, port: config.redis.port },
+  connection: redisConnection,
   concurrency: config.email.workerConcurrency, // Parallel processing
 });
 

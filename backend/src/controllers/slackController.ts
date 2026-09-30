@@ -32,7 +32,7 @@ export const slackCallback = async (req: Request, res: Response): Promise<void> 
       body: formData.toString()
     });
     
-    const data = await response.json();
+    const data = (await response.json()) as any;
 
     if (data.ok && data.incoming_webhook) {
       await prisma.user.update({

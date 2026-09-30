@@ -22,12 +22,12 @@ export const googleCallback = async (req: Request, res: Response): Promise<void>
         grant_type: 'authorization_code',
       }),
     });
-    const tokenData = await tokenResponse.json();
+    const tokenData = (await tokenResponse.json()) as any;
 
     const userResponse = await fetch('https://www.googleapis.com/oauth2/v2/userinfo', {
       headers: { Authorization: `Bearer ${tokenData.access_token}` },
     });
-    const userData = await userResponse.json();
+    const userData = (await userResponse.json()) as any;
 
     let user = await prisma.user.findUnique({ where: { email: userData.email } });
     if (!user) {
